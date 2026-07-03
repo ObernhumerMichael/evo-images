@@ -1,8 +1,8 @@
 package com.example;
 
-import java.util.List;
+import java.awt.Graphics2D;
 
-public interface Shape {
+public interface Shape extends Gene {
     /**
      * Returns the color of the shape.
      * 
@@ -11,9 +11,9 @@ public interface Shape {
     ColorGene getColor();
 
     /**
-     * Returns a list of vertices that define the shape.
+     * Draws the shape on the specified Graphics2D object.
      * 
-     * @return a list of vertices that define the shape
+     * @param g2d the Graphics2D object to draw the shape on
      */
-    List<Vertex> getVertices();
+    void draw(Graphics2D g2d);
 }
