@@ -1,3 +1,6 @@
+.envrc
+.env
+
 # Compiled class file
 *.class
 
