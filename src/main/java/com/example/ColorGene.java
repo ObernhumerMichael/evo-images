@@ -1,13 +1,10 @@
 package com.example;
 
 import java.awt.Color;
-import java.util.Random;
 
-public class ColorGene implements Gene {
+public class ColorGene {
     private int[] rgba;
-    private static final Random random = new Random();
     public static final int MAX_COLOR_VALUE = 255;
-    public static final int MAX_SOFT_SHIFT = 15;
 
     /**
      * Constructs a Color object with the specified red, green, blue, and alpha
@@ -22,50 +19,26 @@ public class ColorGene implements Gene {
         return new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
 
-    @Override
     /**
-     * Mutates the color of the triangle by randomly shifting its RGBA components.
-     * The mutation can be a hard color shift, a soft color shift, or an alpha
-     * shift, based on random probabilities.
-     */
-    public void mutate() {
-        int r = random.nextInt(100);
-        if (r <= 10) {
-            hardColorShift(random.nextInt(3));
-        } else if (r <= 40) {
-            alphaShift();
-        } else {
-            softColorShift(random.nextInt(3));
-        }
-    }
-
-    /**
-     * Shifts the color of the triangle softly based on the specified color index.
+     * Shifts a single channel by delta, clamping to [0, MAX_COLOR_VALUE].
      * 
-     * @param colorIndex
+     * @param channelIndex the index of the channel to shift (0 for red, 1 for
+     *                     green, 2 for blue, 3 for alpha)
+     * @param delta        the amount to shift the channel by
      */
-    private void softColorShift(int colorIndex) {
-        int shift = random.nextInt(-MAX_SOFT_SHIFT, MAX_SOFT_SHIFT);
-        rgba[colorIndex] += shift;
-        rgba[colorIndex] = Math.clamp(rgba[colorIndex], 0, MAX_COLOR_VALUE); // add this
-
+    public void shiftChannel(int channelIndex, int delta) {
+        int value = rgba[channelIndex] + delta;
+        rgba[channelIndex] = Math.clamp(value, 0, MAX_COLOR_VALUE);
     }
 
     /**
-     * Shifts the color of the triangle hard based on the specified color index.
+     * Hard-sets a single channel to a random value in [0, MAX_COLOR_VALUE].
      * 
-     * @param colorIndex
+     * @param channelIndex the index of the channel to randomize (0 for red, 1 for
+     *                     green, 2 for blue, 3 for alpha)
+     * @param newValue     the new value for the channel
      */
-    private void hardColorShift(int colorIndex) {
-        rgba[colorIndex] = random.nextInt(MAX_COLOR_VALUE + 1);
-    }
-
-    /**
-     * Shifts the alpha of the triangle softly.
-     */
-    private void alphaShift() {
-        int shift = random.nextInt(20, 180);
-        rgba[3] = shift;
-        rgba[3] = Math.clamp(rgba[3], 0, MAX_COLOR_VALUE); // add this
+    public void setChannel(int channelIndex, int newValue) {
+        rgba[channelIndex] = Math.clamp(newValue, 0, MAX_COLOR_VALUE);
     }
 }

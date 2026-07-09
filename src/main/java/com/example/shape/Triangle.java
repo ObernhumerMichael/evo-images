@@ -1,7 +1,9 @@
-package com.example;
+package com.example.shape;
 
 import java.awt.Graphics2D;
 import java.util.Random;
+
+import com.example.ColorGene;
 
 public class Triangle implements Shape {
     private static final Random random = new Random();
@@ -44,9 +46,9 @@ public class Triangle implements Shape {
                 random.nextInt(256));
         this.width = width;
         this.height = height;
-        Node n1 = new Node(random.nextInt(width + 1), random.nextInt(height + 1));
-        Node n2 = new Node(random.nextInt(width + 1), random.nextInt(height + 1));
-        Node n3 = new Node(random.nextInt(width + 1), random.nextInt(height + 1));
+        Vertex n1 = new Vertex(random.nextInt(width + 1), random.nextInt(height + 1));
+        Vertex n2 = new Vertex(random.nextInt(width + 1), random.nextInt(height + 1));
+        Vertex n3 = new Vertex(random.nextInt(width + 1), random.nextInt(height + 1));
         this.vertices = new Vertex[] { n1, n2, n3 };
     }
 
@@ -56,36 +58,41 @@ public class Triangle implements Shape {
     }
 
     @Override
-    /**
-     * Mutates the triangle by randomly mutating one of its vertices or its color.
-     * The mutation is applied with a 50% chance to either mutate a vertex or the
-     * color.
-     */
-    public void mutate() {
-        if (random.nextBoolean()) {
-            int index = random.nextInt(3);
-            vertices[index].mutate();
-            moveInBorder(index);
-        } else {
-            color.mutate();
-        }
-    }
-
-    /**
-     * Moves the vertex at the specified index within the bounds of the canvas.
-     * 
-     * @param index
-     */
-    private void moveInBorder(int index) {
-        Vertex vertex = vertices[index];
-        int x = vertex.getX();
-        int y = vertex.getY();
-        vertex.setX(Math.min(Math.max(x, 0), width));
-        vertex.setY(Math.min(Math.max(y, 0), height));
+    public int getVertexCount() {
+        return vertices.length;
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
+    public Vertex getVertex(int index) {
+        validateIndex(index);
+        return vertices[index];
+    }
+
+    @Override
+    public void shiftVertex(int index, int deltaX, int deltaY) {
+        validateIndex(index);
+        Vertex v = vertices[index];
+        vertices[index] = clampedVertex(v.getX() + deltaX, v.getY() + deltaY);
+    }
+
+    @Override
+    public void setVertex(int index, Vertex newVertex) {
+        validateIndex(index);
+        vertices[index] = clampedVertex(newVertex.getX(), newVertex.getY());
+    }
+
+    private void validateIndex(int index) {
+        if (index < 0 || index >= getVertexCount()) {
+            throw new IllegalArgumentException("Index out of bounds: " + index);
+        }
+    }
+
+    private Vertex clampedVertex(int x, int y) {
+        return new Vertex(Math.clamp(x, 0, width), Math.clamp(y, 0, height));
+    }
+
+    @Override
+    public void render(Graphics2D g2d) {
         g2d.setColor(color.getColor());
         g2d.fillPolygon(
                 new int[] { vertices[0].getX(), vertices[1].getX(), vertices[2].getX() },

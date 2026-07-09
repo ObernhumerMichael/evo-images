@@ -18,7 +18,7 @@ public class Main {
         g2d.clearRect(0, 0, width, height);
 
         Genome genome = new Genome(width, height, 10);
-        genome.draw(g2d);
+        genome.render(g2d);
 
         JFrame frame = new JFrame("Drawing Shapes");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

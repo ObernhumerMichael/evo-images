@@ -1,14 +1,11 @@
 package com.example;
 
 import java.awt.Graphics2D;
-import java.util.Random;
+import com.example.shape.Shape;
+import com.example.shape.Triangle;
 
-public class Genome implements Gene {
-    private static final double MUTATION_RATE = 0.03; // 3% mutation rate
-    private static final Random random = new Random();
+public class Genome implements Render {
     private Shape[] shapes;
-    private final int width;
-    private final int height;
 
     /**
      * Constructs a Genome with the specified shapes, width, and height.
@@ -19,8 +16,6 @@ public class Genome implements Gene {
      */
     public Genome(Shape[] shapes, int width, int height) {
         this.shapes = shapes;
-        this.width = width;
-        this.height = height;
     }
 
     /**
@@ -32,22 +27,11 @@ public class Genome implements Gene {
      * @param numShapes
      */
     public Genome(int width, int height, int numShapes) {
-        Shape[] shapes = new Shape[numShapes];
+        Shape[] generated = new Shape[numShapes];
         for (int i = 0; i < numShapes; i++) {
-            shapes[i] = new Triangle(width, height);
+            generated[i] = new Triangle(width, height);
         }
-        this.shapes = shapes;
-        this.width = width;
-        this.height = height;
-    }
-
-    @Override
-    public void mutate() {
-        for (Shape shape : shapes) {
-            if (random.nextDouble() < MUTATION_RATE) {
-                shape.mutate();
-            }
-        }
+        this.shapes = generated;
     }
 
     /**
@@ -55,9 +39,9 @@ public class Genome implements Gene {
      *
      * @param g2d the Graphics2D object to draw the shapes on
      */
-    public void draw(Graphics2D g2d) {
+    public void render(Graphics2D g2d) {
         for (Shape shape : shapes) {
-            shape.draw(g2d);
+            shape.render(g2d);
         }
     }
 
