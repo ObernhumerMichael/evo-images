@@ -1,11 +1,7 @@
-package shape;
+package com.example.shape;
 
 import com.example.ColorGene;
-import com.example.shape.Triangle;
-import com.example.shape.Vertex;
-
 import org.junit.jupiter.api.Test;
-
 import java.awt.Graphics2D;
 
 import static org.junit.jupiter.api.Assertions.*;

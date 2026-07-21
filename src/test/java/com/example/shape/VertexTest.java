@@ -1,9 +1,6 @@
-package shape;
+package com.example.shape;
 
 import org.junit.jupiter.api.Test;
-
-import com.example.shape.Vertex;
-
 import static org.assertj.core.api.Assertions.*;
 
 class VertexTest {

@@ -1,4 +1,4 @@
-package mutation;
+package com.example.mutation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.inOrder;
@@ -9,7 +9,6 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import com.example.ColorGene;
-import com.example.mutation.HardColorShiftMutation;
 import com.example.shape.Triangle;
 import com.example.shape.Vertex;
 
