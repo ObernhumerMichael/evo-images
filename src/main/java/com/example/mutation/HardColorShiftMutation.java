@@ -3,9 +3,14 @@ package com.example.mutation;
 import java.util.Random;
 
 import com.example.ColorGene;
+import com.example.shape.Triangle;
 
 public class HardColorShiftMutation implements ShapeMutationOperator {
-    private static final Random random = new Random();
+    private final Random random;
+
+    public HardColorShiftMutation(Random random) {
+        this.random = random;
+    }
 
     /**
      * Applies a hard color shift to the shape's color.
@@ -14,10 +19,10 @@ public class HardColorShiftMutation implements ShapeMutationOperator {
      * @param shape the shape to apply the mutation to
      */
     @Override
-    public void apply(com.example.shape.Shape shape) {
-        int colorIndex = random.nextInt(3);
+    public void apply(Triangle triangle) {
+        int colorIndex = random.nextInt(ColorGene.ALPHA_CHANNEL);
         int value = random.nextInt(0, ColorGene.MAX_COLOR_VALUE + 1);
-        shape.getColor().setChannel(colorIndex, value);
+        triangle.getColor().setChannel(colorIndex, value);
     }
 
 }

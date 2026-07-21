@@ -4,8 +4,9 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import com.example.ColorGene;
+import com.example.Renderable;
 
-public class Triangle implements Shape {
+public class Triangle implements Renderable {
     private static final Random random = new Random();
     private ColorGene color;
     /** An array of three vertices that define the triangle */
@@ -52,30 +53,61 @@ public class Triangle implements Shape {
         this.vertices = new Vertex[] { n1, n2, n3 };
     }
 
-    @Override
+    /**
+     * Returns the color of the shape.
+     * 
+     * @return the color of the shape
+     */
     public ColorGene getColor() {
         return color;
     }
 
-    @Override
+    /**
+     * Returns the number of vertices in the shape.
+     * 
+     * @return the number of vertices in the shape
+     */
     public int getVertexCount() {
         return vertices.length;
     }
 
-    @Override
+    /**
+     * Returns the vertex at the specified index.
+     * 
+     * @param index >= 0 and < getVertexCount() the index of the vertex to return
+     * @return the vertex at the specified index
+     * @throws IllegalArgumentException if the index is out of bounds
+     */
     public Vertex getVertex(int index) {
         validateIndex(index);
         return vertices[index];
     }
 
-    @Override
+    /**
+     * Shifts the vertex at the specified index by the specified delta values.
+     * If the resulting vertex is outside the bounds of the canvas, it will be
+     * clamped to the nearest edge.
+     * 
+     * @param index  the index of the vertex to shift
+     * @param deltaX the amount to shift the vertex in the x direction
+     * @param deltaY the amount to shift the vertex in the y direction
+     * @throws IllegalArgumentException if the index is out of bounds
+     */
     public void shiftVertex(int index, int deltaX, int deltaY) {
         validateIndex(index);
         Vertex v = vertices[index];
         vertices[index] = clampedVertex(v.getX() + deltaX, v.getY() + deltaY);
     }
 
-    @Override
+    /**
+     * Sets the vertex at the specified index to a new vertex.
+     * If the resulting vertex is outside the bounds of the canvas, it will be
+     * clamped to the nearest edge.
+     * 
+     * @param index     the index of the vertex to set
+     * @param newVertex the new vertex to set
+     * @throws IllegalArgumentException if the index is out of bounds
+     */
     public void setVertex(int index, Vertex newVertex) {
         validateIndex(index);
         vertices[index] = clampedVertex(newVertex.getX(), newVertex.getY());

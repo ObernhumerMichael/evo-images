@@ -1,10 +1,15 @@
 package com.example;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 public class ColorGene {
     private int[] rgba;
     public static final int MAX_COLOR_VALUE = 255;
+    public static final int RED_CHANNEL = 0;
+    public static final int GREEN_CHANNEL = 1;
+    public static final int BLUE_CHANNEL = 2;
+    public static final int ALPHA_CHANNEL = 3;
 
     /**
      * Constructs a Color object with the specified red, green, blue, and alpha
@@ -40,5 +45,26 @@ public class ColorGene {
      */
     public void setChannel(int channelIndex, int newValue) {
         rgba[channelIndex] = Math.clamp(newValue, 0, MAX_COLOR_VALUE);
+    }
+
+    public int getRed() {
+        return rgba[0];
+    }
+
+    public int getGreen() {
+        return rgba[1];
+    }
+
+    public int getBlue() {
+        return rgba[2];
+    }
+
+    public int getAlpha() {
+        return rgba[3];
+    }
+
+    @Override
+    public String toString() {
+        return "ColorGene(" + Arrays.toString(rgba) + ")";
     }
 }

@@ -2,7 +2,7 @@ package com.example;
 
 import java.awt.Graphics2D;
 
-public interface Render {
+public interface Renderable {
     /**
      * Draws the shape on the specified Graphics2D object.
      * 

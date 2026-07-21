@@ -1,3 +1,5 @@
+package shape;
+
 import org.junit.jupiter.api.Test;
 
 import com.example.shape.Vertex;

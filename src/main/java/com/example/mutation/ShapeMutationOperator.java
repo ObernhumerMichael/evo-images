@@ -1,12 +1,12 @@
 package com.example.mutation;
 
-import com.example.shape.Shape;
+import com.example.shape.Triangle;
 
 public interface ShapeMutationOperator {
     /**
      * Applies a mutation to the given shape.
      * 
-     * @param shape the shape to mutate
+     * @param triangle the tirangle to mutate
      */
-    void apply(Shape shape);
+    void apply(Triangle triangle);
 }

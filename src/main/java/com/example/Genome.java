@@ -1,21 +1,20 @@
 package com.example;
 
 import java.awt.Graphics2D;
-import com.example.shape.Shape;
 import com.example.shape.Triangle;
 
-public class Genome implements Render {
-    private Shape[] shapes;
+public class Genome implements Renderable {
+    private Triangle[] triangles;
 
     /**
      * Constructs a Genome with the specified shapes, width, and height.
      *
-     * @param shapes the array of shapes to include in the genome
-     * @param width  the width of the canvas
-     * @param height the height of the canvas
+     * @param triangles the array of triangles to include in the genome
+     * @param width     the width of the canvas
+     * @param height    the height of the canvas
      */
-    public Genome(Shape[] shapes, int width, int height) {
-        this.shapes = shapes;
+    public Genome(Triangle[] triangles, int width, int height) {
+        this.triangles = triangles;
     }
 
     /**
@@ -27,11 +26,11 @@ public class Genome implements Render {
      * @param numShapes
      */
     public Genome(int width, int height, int numShapes) {
-        Shape[] generated = new Shape[numShapes];
+        Triangle[] generated = new Triangle[numShapes];
         for (int i = 0; i < numShapes; i++) {
             generated[i] = new Triangle(width, height);
         }
-        this.shapes = generated;
+        this.triangles = generated;
     }
 
     /**
@@ -40,8 +39,8 @@ public class Genome implements Render {
      * @param g2d the Graphics2D object to draw the shapes on
      */
     public void render(Graphics2D g2d) {
-        for (Shape shape : shapes) {
-            shape.render(g2d);
+        for (Triangle triangle : triangles) {
+            triangle.render(g2d);
         }
     }
 
