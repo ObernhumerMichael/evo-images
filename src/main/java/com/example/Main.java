@@ -1,29 +1,25 @@
 package com.example;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import javax.swing.*;
-
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         int width = 800;
         int height = 600;
-        BufferedImage canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = canvas.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setBackground(Color.WHITE);
-        g2d.clearRect(0, 0, width, height);
 
-        Genome genome = new Genome(width, height, 10);
-        genome.render(g2d);
+        Genome genome;
+        GenerateImage gi = new GenerateImage(width, height);
+        for (int i = 0; i < 10; i++) {
+            genome = new Genome(width, height, 15);
+            gi.render(genome);
+            gi.display();
+            sleep();
+        }
+    }
 
-        JFrame frame = new JFrame("Drawing Shapes");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new JLabel(new ImageIcon(canvas)));
-        frame.pack();
-        frame.setVisible(true);
+    private static void sleep() {
+        try {
+            Thread.sleep(100); // Pauses for 1000 milliseconds (1 second)
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore interrupted status
+        }
     }
 }
