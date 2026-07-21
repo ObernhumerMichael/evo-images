@@ -74,12 +74,11 @@ public class Triangle implements Renderable {
     /**
      * Returns the vertex at the specified index.
      * 
-     * @param index >= 0 and < getVertexCount() the index of the vertex to return
+     * @param index the index of the vertex to return;
+     *              {@code index >= 0 and < getVertexCount()}
      * @return the vertex at the specified index
-     * @throws IllegalArgumentException if the index is out of bounds
      */
     public Vertex getVertex(int index) {
-        validateIndex(index);
         return vertices[index];
     }
 
@@ -88,38 +87,17 @@ public class Triangle implements Renderable {
      * If the resulting vertex is outside the bounds of the canvas, it will be
      * clamped to the nearest edge.
      * 
-     * @param index  the index of the vertex to shift
+     * @param index  the index of the vertex to shift,
+     *               {@code index >= 0 and < getVertexCount()}
      * @param deltaX the amount to shift the vertex in the x direction
      * @param deltaY the amount to shift the vertex in the y direction
-     * @throws IllegalArgumentException if the index is out of bounds
      */
     public void shiftVertex(int index, int deltaX, int deltaY) {
-        validateIndex(index);
         Vertex v = vertices[index];
-        vertices[index] = clampedVertex(v.getX() + deltaX, v.getY() + deltaY);
+        vertices[index] = clampVertex(v.getX() + deltaX, v.getY() + deltaY);
     }
 
-    /**
-     * Sets the vertex at the specified index to a new vertex.
-     * If the resulting vertex is outside the bounds of the canvas, it will be
-     * clamped to the nearest edge.
-     * 
-     * @param index     the index of the vertex to set
-     * @param newVertex the new vertex to set
-     * @throws IllegalArgumentException if the index is out of bounds
-     */
-    public void setVertex(int index, Vertex newVertex) {
-        validateIndex(index);
-        vertices[index] = clampedVertex(newVertex.getX(), newVertex.getY());
-    }
-
-    private void validateIndex(int index) {
-        if (index < 0 || index >= getVertexCount()) {
-            throw new IllegalArgumentException("Index out of bounds: " + index);
-        }
-    }
-
-    private Vertex clampedVertex(int x, int y) {
+    private Vertex clampVertex(int x, int y) {
         return new Vertex(Math.clamp(x, 0, width), Math.clamp(y, 0, height));
     }
 
