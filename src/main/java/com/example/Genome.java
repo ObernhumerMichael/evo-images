@@ -5,6 +5,7 @@ import com.example.shape.Triangle;
 
 public class Genome implements Renderable {
     private Triangle[] triangles;
+    private long fitness;
 
     /**
      * Constructs a Genome with the specified shapes, width, and height.
@@ -50,6 +51,14 @@ public class Genome implements Renderable {
         for (Triangle triangle : triangles) {
             triangle.render(g2d);
         }
+    }
+
+    public void setFintess(long fitness) {
+        this.fitness = fitness;
+    }
+
+    public long getFitness() {
+        return fitness;
     }
 
 }
