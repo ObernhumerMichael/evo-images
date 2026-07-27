@@ -4,6 +4,10 @@ public class Vertex {
     private final int x;
     private final int y;
 
+    public Vertex(Vertex other) {
+        this(other.x, other.y);
+    }
+
     public Vertex(int x, int y) {
         this.x = x;
         this.y = y;

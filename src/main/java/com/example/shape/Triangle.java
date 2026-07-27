@@ -35,6 +35,17 @@ public class Triangle implements Renderable {
         this.height = height;
     }
 
+    public Triangle(Triangle other) {
+        color = new ColorGene(other.color);
+        width = other.width;
+        height = other.height;
+        vertices = new Vertex[3];
+
+        for (int i = 0; i < other.vertices.length; i++) {
+            vertices[i] = new Vertex(other.vertices[i]);
+        }
+    }
+
     /**
      * Constructs a Triangle with random color and three random vertices within the
      * specified width and height.

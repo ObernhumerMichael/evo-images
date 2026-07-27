@@ -33,6 +33,14 @@ public class Genome implements Renderable {
         this.triangles = generated;
     }
 
+    public Genome(Genome other) {
+        triangles = new Triangle[other.triangles.length];
+
+        for (int i = 0; i < other.triangles.length; i++) {
+            triangles[i] = new Triangle(other.triangles[i]);
+        }
+    }
+
     /**
      * Draws all the shapes in the genome on the specified Graphics2D object.
      *

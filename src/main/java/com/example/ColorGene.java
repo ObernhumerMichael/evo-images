@@ -20,6 +20,10 @@ public class ColorGene {
         this.rgba = new int[] { r, g, b, alpha };
     }
 
+    public ColorGene(ColorGene other) {
+        rgba = other.rgba.clone();
+    }
+
     public Color getColor() {
         return new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
