@@ -15,8 +15,8 @@ public class Selection {
   }
 
   public Genome[] select(Population population) {
-    if (population.getGenomes().size() == 0) {
-      throw new IllegalArgumentException("population size must be greater than 0");
+    if (population.getGenomes().isEmpty()) {
+      throw new IllegalArgumentException("population must not be empty");
     }
 
     Genome[] selection = new Genome[select];

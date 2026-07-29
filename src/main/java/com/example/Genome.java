@@ -42,6 +42,10 @@ public class Genome implements Renderable {
     }
   }
 
+  public Triangle[] getTriangles() {
+    return triangles;
+  }
+
   /**
    * Draws all the shapes in the genome on the specified Graphics2D object.
    *
