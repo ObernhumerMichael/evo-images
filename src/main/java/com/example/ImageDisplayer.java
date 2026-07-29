@@ -9,10 +9,10 @@ import javax.swing.SwingUtilities;
 class ImageDisplayer {
     private final CanvasPanel panel;
 
-    public ImageDisplayer(BufferedImage image) {
+    public ImageDisplayer(BufferedImage image, String name) {
         panel = new CanvasPanel(image);
 
-        JFrame frame = new JFrame("Current Image");
+        JFrame frame = new JFrame(name);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         frame.pack();
